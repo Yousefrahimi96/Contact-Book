@@ -1,45 +1,51 @@
 class ContactBook:
+    """A class to manage a contact book with basic CRUD operations."""
+
     def __init__(self):
+        """Initialize an empty contact dictionary."""
         self.contact = {}
-        
+
     def add_contact(self, name, number, email):
-        
+        """Add a new contact to the contact book."""
         if name not in self.contact:
-            self.contact[name] = {"number" : number, "email" : email}
+            self.contact[name] = {"number": number, "email": email}
         else:
-            print("name is exist") 
-        
+            print("Name already exists")
+
     def detect_contact(self, name):
+        """Detect and display a contact by name."""
         if name in self.contact:
             info = self.contact[name]
             print(f"Name: {name}")
             print(f"Number: {info['number']}")
             print(f"Email: {info['email']}")
         else:
-            print(f"{name} is not exist")
-    
-    def update_contact(self, name, number= None, email= None):
+            print(f"{name} does not exist")
+
+    def update_contact(self, name, number=None, email=None):
+        """Update the phone number or email of an existing contact."""
         if name in self.contact:
-            if number is not None:
+            if number:
                 self.contact[name]['number'] = number
-            if email is not None:
+            if email:
                 self.contact[name]['email'] = email
         else:
-            print(f"{name} is not exist")
-    
+            print(f"{name} does not exist")
+
     def view_contact(self):
+        """Display all contacts in the contact book."""
         for name, info in self.contact.items():
-            print("Name:", name)
-            print("Number:", info['number'])
-            print("Email:", info['email'])
-        
+            print(f"Name: {name}")
+            print(f"Number: {info['number']}")
+            print(f"Email: {info['email']}")
+
     def delete_contact(self, name):
+        """Delete a contact by name."""
         if name in self.contact:
             del self.contact[name]
-            print(f"{name} succesfuly deleted")
+            print(f"{name} successfully deleted")
         else:
             print(f"{name} not found")
-
 
 
 if __name__ == "__main__":
@@ -64,12 +70,12 @@ if __name__ == "__main__":
         elif user_choice == '2':
             name = input("\nEnter name of the contact to detect: ")
             book.detect_contact(name)
-            
+
         elif user_choice == '3':
             name = input("\nEnter name of the contact to edit: ")
             number = input("Enter new/updated phone number or press Enter to keep unchanged: ")
             email = input("Enter new/updated email or press Enter to keep unchanged: ")
-            book.update_contact(name, number or None, email or None)
+            book.update_contact(name, number if number else None, email if email else None)
 
         elif user_choice == '4':
             print("\nList of Contacts:")
@@ -80,7 +86,7 @@ if __name__ == "__main__":
             book.delete_contact(name)
 
         elif user_choice == '6':
-            print("\nThank You for using Contact Book Application. Goodbye!")
+            print("\nThank you for using Contact Book Application. Goodbye!")
             break
 
         else:
